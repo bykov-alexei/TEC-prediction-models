@@ -1,0 +1,6 @@
+[submodule "ionex"]
+	path = ionex
+	url = https://github.com/gnss-lab/ionex
+[submodule "data_loaders/ionex"]
+	path = data_loaders/ionex
+	url = https://github.com/gnss-lab/ionex
