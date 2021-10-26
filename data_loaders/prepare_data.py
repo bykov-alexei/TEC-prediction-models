@@ -1,3 +1,5 @@
+# Prepares data for machine learning model training with requested params
+
 import pandas as pd
 import numpy as np
 
@@ -85,8 +87,8 @@ def get_training_data(
     ]
     test_maps = maps[test_meta.map_index.astype(int).tolist()]
 
-    train_meta = train_meta.drop(columns=['datetime', 'hours', 'map_index'])
-    val_meta = val_meta.drop(columns=['datetime', 'hours', 'map_index'])  
-    test_meta = test_meta.drop(columns=['datetime', 'hours', 'map_index'])
+    train_meta = train_meta.drop(columns=['hours', 'map_index'])
+    val_meta = val_meta.drop(columns=['hours', 'map_index'])  
+    test_meta = test_meta.drop(columns=['hours', 'map_index'])
 
     return (train_meta, train_maps), (val_meta, val_maps), (test_meta, test_maps)
