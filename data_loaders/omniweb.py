@@ -64,13 +64,17 @@ def load_table(start_date, end_date, indices):
     if 'AU' in table:
         table.loc[table['AU'] == 99999, 'AU'] = np.nan
 
+    table = table.assign(
+        datetime = pd.to_datetime(
+            pd.to_datetime(table.YEAR, format='%Y').astype(int) // (10 ** 9) + \
+                    (table.DAY - 1) * 24 * 3600 + \
+                    (table.UT)  * 3600,
+            unit='s',
+            )
+    )
+
     return table
 
-def save_table(table):
-    c = config['feature_storage']
-    engine = create_engine(f"mysql://{c['user']}:{c['password']}@{c['host']}:5432/{c['database']}")
-    table.to_sql('indices', con=engine, if_exists='replace')
-
-
 table = load_table(start_date, end_date, indices)
-save_table(table)
+table = table.drop(columns=['YEAR', 'DAY', 'UT'])
+table.to_csv('indices.csv', index=False)
