@@ -3,3 +3,6 @@ data/
 *mlruns*
 config.py
 *ipynb*
+plots/
+newplots/*
+lastplots/*

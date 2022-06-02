@@ -1,7 +1,0 @@
-pandas
-sqlalchemy
-mysqlclient
-tqdm
-matplotlib
-
-git+https://github.com/gnss-lab/ionex.git#egg=ionex

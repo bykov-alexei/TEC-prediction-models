@@ -57,7 +57,7 @@ if __name__ == '__main__':
 
     print('Assembling...')
     for date in tqdm.tqdm(meta.datetime):
-        arr.append(maps_by_time[date])
+        arr.append(maps_by_time[date])  
     arr = np.array(arr)
     np.save('maps', arr)
     meta.to_csv('meta.csv', index=False)

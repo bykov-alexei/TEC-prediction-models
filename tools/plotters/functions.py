@@ -1,3 +1,4 @@
+import math
 import numpy as np
 import pandas as pd
 import joblib as jl
@@ -10,6 +11,14 @@ import matplotlib as mpl
 
 plotdir = 'plots3/'
 plot_model_names = False
+
+def generate_ticks(min, max, number):
+    step = (max - min) // number
+    ticks = [math.ceil(min)]
+    for i in range(1, number):
+        ticks.append(int(min+i*step))
+    ticks.append(int(max))
+    return ticks
 
 def plot_mercater_map(mapdata, minvalue = None, maxvalue=None):
     a = mapdata.reshape((72,71))
@@ -48,7 +57,6 @@ def plot_mercater_map(mapdata, minvalue = None, maxvalue=None):
     clevs = np.linspace(minvalue, maxvalue, 128)
     cf = m.contourf(xi, yi, zi, clevs, cmap=plt.cm.jet, extend='both', latlon=True)
     cbar = m.colorbar(cf, location='bottom')
-    ticks = np.arange(minvalue, maxvalue, 5).astype(int).tolist()
+    ticks = np.arange(minvalue, maxvalue).astype(int)
     cbar.set_ticks(ticks)
-    cbar.set_ticklabels(ticks)
 
